@@ -9,5 +9,14 @@ module.exports = appInfo => {
   // add your config here
   config.middleware = [];
 
+  // config.security = {
+  //     csrf: false
+  // };
+  //
+  config.cors = {
+      origin: 'http://localhost:3000',
+      credentials: true,
+  };
+
   return config;
 };

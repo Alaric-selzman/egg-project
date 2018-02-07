@@ -2,10 +2,22 @@
 
 const Controller = require('egg').Controller;
 
-class HomeController extends Controller {
-  async index() {
-    this.ctx.body = 'hi, egg';
-  }
-}
 
-module.exports = HomeController;
+module.exports = app => {
+
+    class HomeController extends Controller {
+
+        async index(ctx, next) {
+            ctx.body = 'hi, eggs';
+        }
+
+        async testApi(ctx, next) {
+            ctx.body = {
+                msg: 'sucess'
+            }
+        }
+
+    }
+
+    return HomeController;
+};
