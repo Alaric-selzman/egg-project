@@ -1,7 +1,7 @@
 
 const config = {
     baseUrl: 'http://127.0.0.1:7001/api',
-
+    allowResponseStatus: /^\d\d\d$/,
 }
 
 const ERROR_MESSAGE = '网路错误';
@@ -23,6 +23,10 @@ export default class BaseApi {
         }
     }
 
+    async getResponseData(resp) {
+        const r = await resp.json();
+    }
+
     async requestWithoutBody(method, api, query, opts = {}) {
         const url = this.url(api, query);
         const headers = this.setHeaders();
@@ -30,6 +34,12 @@ export default class BaseApi {
             method, ...opts, headers,
             credentials: 'include',
         });
+        if(!this.config.allowResponseStatus.test(resp.status)) {
+            const e = new Error(ERROR_MESSAGE);
+            e.status = resp.status;
+            throw e;
+        }
+        const data = await this.getResponseData(resp);
     }
 
     setHeaders() {

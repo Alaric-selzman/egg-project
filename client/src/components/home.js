@@ -22,6 +22,7 @@ export default class Home extends Component {
             }
         }
         const r = await api.test(id, data);
+        console.log('request', r)
     }
 
     render() {

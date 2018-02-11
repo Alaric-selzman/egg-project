@@ -13,7 +13,7 @@ module.exports = app => {
 
         async testApi(ctx, next) {
             ctx.body = {
-                msg: 'sucess'
+                masg: 'test'
             }
         }
 
